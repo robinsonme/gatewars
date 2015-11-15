@@ -1,0 +1,15 @@
+<template name="layout">
+  <div class="container">
+    {{> navigation}}
+
+    {{#if currentUser}}
+      {{> navLeft}}
+    {{/if}}
+    <div class="col-md-10" id="main">
+      {{> yield}}
+    </div>
+  </div>
+  <br />
+	<hr class="col-md-12" />
+	<p align="center" class="col-md-12">Copyright &copy; Gatewars, 2015.</p>
+</template>
