@@ -1,5 +1,12 @@
 <template name="command">
-  <p class="col-md-10" align="center">
-    {{currentUser.username}}'s Command Center
-  </p>
+  <div class="col-md-10">
+    <h2>{{currentUser.username}}'s Command Center</h2>
+    <p>
+      You currently make {{formatCurrency player.rate}} and have {{formatCurrency player.money}} gold.
+    </p>
+    <input type="button" class="code btn span4" value="Raid a mine. ($25)" />
+    {{#each workers}}
+      <input type="button" class="buy btn span4" id="{{cost}}" value="Buy {{name}} (${{cost}})" />
+    {{/each}}
+  </div>
 </template>

@@ -1,11 +1,12 @@
 <template name="layout">
-  <div class="container">
+  <div class="container col-md-12">
     {{> navigation}}
 
-    {{#if currentUser}}
-      {{> navLeft}}
-    {{/if}}
-    <div class="col-md-10" id="main">
+
+    <div id="main">
+      {{#if currentUser}}
+        {{> navLeft}}
+      {{/if}}
       {{> yield}}
     </div>
   </div>

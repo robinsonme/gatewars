@@ -5,9 +5,27 @@
       Go to your command center to get started.
     </p>
     {{else}}
-    <p>
-      Log in to go to war!
-    </p>
+    <h2>Top Rankings</h2>
+    <table class="table table-stripped">
+      <thead>
+        <tr>
+          <td>Rank</td>
+          <th>Username</th>
+          <th>Rate</th>
+          <th>Money</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each players}}
+        <tr class="player">
+          <td class="rank">{{addOne @index}}</td>
+          <td class="name">{{username}}</td>
+          <td class="rate">${{formatCurrency rate}}/minute</td>
+          <td class="money">${{formatCurrency money}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
     {{/if}}
   </div>
 </template>
