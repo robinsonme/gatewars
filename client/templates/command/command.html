@@ -20,7 +20,7 @@
           <tr class="workers">
             <td class="action">Buy {{name}}</td>
             <td class="cost">${{formatCurrency cost}}</td>
-            <td class="number">{{number name}}</td>
+            <td class="number">{{formatCurrency (number name)}}</td>
             <input type="button" class="buy btn span2" id="{{name}}" value="Buy" />
           </tr>
         {{/each}}
