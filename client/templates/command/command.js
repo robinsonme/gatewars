@@ -4,18 +4,31 @@ Template.command.helpers({
     return Players.findOne({createdBy: currentUser});
   },
   'workers':function() {
-    return [{name: "Miner", cost: 500}, {name: "Engineer", cost: 5000}, {name: "Foreman", cost: 25000}, {name: "Supervisor", cost: 100000}, {name: "Excavator", cost: 500000}, {name: "John Henry", cost: 5000000}];
+    return Workers.find({});
   },
   'formatCurrency':function(number) {
     return number.toLocaleString();
+  },
+  'number': function(name) {
+    var currentUser = Meteor.userId();
+    var selector = {};
+    selector[name] = 1;
+    var player = Players.findOne({createdBy: currentUser}, {fields: selector});
+    if(player[name]) {
+      return player[name];
+    } else {
+      return 0;
+    }
   }
 });
 
 Template.command.events({
   'click input.code': function() {
     Meteor.call('click');
+  },'click input.codeBig': function() {
+    Meteor.call('clickBig');
   },
   'click input.buy': function(event) {
-    Meteor.call('buy', event.target.id);
+    Meteor.call('purchase', event.target.id);
   }
 });

@@ -5,8 +5,26 @@
       You currently make {{formatCurrency player.rate}} and have {{formatCurrency player.money}} gold.
     </p>
     <input type="button" class="code btn span4" value="Raid a mine. ($25)" />
-    {{#each workers}}
-      <input type="button" class="buy btn span4" id="{{cost}}" value="Buy {{name}} (${{cost}})" />
-    {{/each}}
+    <input type="button" class="codeBig btn span4" value="Raid a mine. ($500)" />
+    <br />
+    <table class="table table-stripped">
+      <thead>
+        <tr>
+          <th>Action</th>
+          <th>Cost</th>
+          <th>Own</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each workers}}
+          <tr class="workers">
+            <td class="action">Buy {{name}}</td>
+            <td class="cost">${{formatCurrency cost}}</td>
+            <td class="number">{{number name}}</td>
+            <input type="button" class="buy btn span2" id="{{name}}" value="Buy" />
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
   </div>
 </template>

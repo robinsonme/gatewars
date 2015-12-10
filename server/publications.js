@@ -5,3 +5,7 @@ Meteor.publish('userData', function () {
 Meteor.publish('players', function () {
   return Players.find();
 });
+
+Meteor.publish('workers', function () {
+  return Workers.find();
+});
