@@ -5,7 +5,7 @@
       You currently make {{formatCurrency player.rate}} and have {{formatCurrency player.money}} gold.
     </p>
     <input type="button" class="code btn span4" value="Raid a mine. ($25)" />
-    <input type="button" class="codeBig btn span4" value="Raid a mine. ($500)" />
+    <input type="button" class="codeBig btn span4" value="Raid a bigger mine. ($500)" />
     <br />
     <table class="table table-stripped">
       <thead>
@@ -22,6 +22,9 @@
             <td class="cost">${{formatCurrency cost}}</td>
             <td class="number">{{formatCurrency (number name)}}</td>
             <input type="button" class="buy btn span2" id="{{name}}" value="Buy" />
+            <input type="button" class="buyTen btn span2" id="{{name}}" value="Buy x10" />
+            <input type="button" class="buyHun btn span2" id="{{name}}" value="Buy x100" />
+            <input type="button" class="buyMax btn span2" id="{{name}}" value="Buy Max" />
           </tr>
         {{/each}}
       </tbody>
