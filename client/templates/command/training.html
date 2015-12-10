@@ -40,10 +40,15 @@
             <td class="action">Buy Growth</td>
             <td class="growthCost">${{formatNumber player.growthCost}}</td>
             <td class="currentGrowth">{{formatNumber player.growth}}</td>
-            <input type="button" class="buyGrowth btn span2" id="{{player.growthCost}}" value="Buy" />
-            <input type="button" class="buyTenGrowth btn span2" id="{{player.growthCost}}" value="Buy x10" />
-            <input type="button" class="buyHunGrowth btn span2" id="{{player.growthCost}}" value="Buy x100" />
-            <input type="button" class="buyMaxGrowth btn span2" id="{{player.growthCost}}" value="Buy Max" />
+            <input type="button" class="buyGrowth btn span2" value="Buy" />
+            <input type="button" class="buyTenGrowth btn span2" value="Buy x10" />
+            <input type="button" class="buyHunGrowth btn span2" value="Buy x100" />
+            <input type="button" class="buyMaxGrowth btn span2" value="Buy Max" />
+          </tr>
+          <tr>
+            <input type="button" class="killCitizens btn span2" value="Kill All Citizens" />
+            <input type="button" class="resetGrowthRate btn span2" value="Reset Growth Rate" />
+            <input type="button" class="killWorkers btn span2" value="Kill Workers" />
           </tr>
         </tbody>
       </table>

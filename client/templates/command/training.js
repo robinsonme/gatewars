@@ -42,23 +42,47 @@ Template.training.events({
     }
     Meteor.call('purchase', event.target.id, max);
   },
-  'click input.buyGrowth': function(event) {
-    Meteor.call('purchaseGrowth', event.target.id);
+  'click input.buyGrowth': function() {
+    Meteor.call('purchaseGrowth');
   },
-  'click input.buyTenGrowth': function(event) {
-    Meteor.call('purchaseGrowth', event.target.id, 10);
+  'click input.buyTenGrowth': function() {
+    Meteor.call('purchaseGrowth', 10);
   },
-  'click input.buyHunGrowth': function(event) {
-    Meteor.call('purchaseGrowth', event.target.id, 100);
+  'click input.buyHunGrowth': function() {
+    Meteor.call('purchaseGrowth', 100);
   },
-  'click input.buyMaxGrowth': function(event) {
+  'click input.buyMaxGrowth': function() {
     var currentUser = Meteor.userId();
-    var player = Players.findOne({createdBy: currentUser}, {fields: {money: 1}});
-    var max = Math.floor(player.money / event.target.id);
-    console.log(max);
-    console.log(event.target.id);
-    Meteor.call('purchaseGrowth', event.target.id, max);
-  }
+    var player = Players.findOne({createdBy: currentUser}, {fields: {money: 1, growthCost: 1}});
+
+    var cost = player.growthCost;
+    cost = Math.ceil(cost);
+    var totalCost = 0;
+    var max = 0;
+    while (player.money >= totalCost) {
+      cost = Math.ceil(cost * 1.01);
+      totalCost = totalCost + cost;
+      max = max + 1;
+    }
+    if (totalCost > player.money) {
+      max = max - 1;
+    }
+    console.log("Max: "+ max);
+    console.log("TotalCost: "+ totalCost);
+    console.log("Money: "+ player.money);
+    console.log("GrowthCost: "+ player.growthCost);
+
+    Meteor.call('purchaseGrowth', max);
+  },
+  'click input.resetGrowthRate': function() {
+    Meteor.call('resetGrowthRate');
+  },
+  'click input.killCitizens': function() {
+    Meteor.call('killCitizens');
+  },
+  'click input.killWorkers': function() {
+    Meteor.call('killWorkers');
+  },
 });
 
 Template.training.onCreated(function() {
