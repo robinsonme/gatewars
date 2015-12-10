@@ -3,7 +3,12 @@ Meteor.publish('userData', function () {
 });
 
 Meteor.publish('players', function () {
-  return Players.find();
+  return Players.find({}, {fields: {username: 1, money: 1, rate: 1}});
+});
+
+Meteor.publish('thisPlayer', function () {
+  var currentUserId = this.userId;
+  return Players.find({createdBy: currentUserId});
 });
 
 Meteor.publish('workers', function () {

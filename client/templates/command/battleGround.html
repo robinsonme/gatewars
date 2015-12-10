@@ -15,8 +15,8 @@
         <tr class="player">
           <td class="rank">{{addOne @index}}</td>
           <td class="name">{{username}}</td>
-          <td class="rate">${{formatCurrency rate}}/minute</td>
-          <td class="money">${{formatCurrency money}}</td>
+          <td class="rate">${{formatNumber rate}}/minute</td>
+          <td class="money">${{formatNumber money}}</td>
         </tr>
         {{/each}}
       </tbody>

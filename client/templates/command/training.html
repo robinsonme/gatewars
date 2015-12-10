@@ -1,5 +1,54 @@
 <template name="training">
-  <p align="center">
-    Training Ground.
-  </p>
+  <div class="col-md-10">
+    <h2>{{currentUser.username}}'s Training Ground</h2>
+    {{#if Template.subscriptionsReady}}
+      <p>
+        You have {{formatNumber player.citizens}} to train and {{formatNumber player.growth}} citizens will arrive next turn.
+      </p>
+      <table class="table table-stripped">
+        <thead>
+          <tr>
+            <th>Train</th>
+            <th>Cost</th>
+            <th>Own</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each workers}}
+            <tr class="workers">
+              <td class="action">Buy {{name}}</td>
+              <td class="cost">${{formatNumber cost}}</td>
+              <td class="number">{{formatNumber (number name)}}</td>
+              <input type="button" class="buy btn span2" id="{{name}}" value="Buy" />
+              <input type="button" class="buyTen btn span2" id="{{name}}" value="Buy x10" />
+              <input type="button" class="buyHun btn span2" id="{{name}}" value="Buy x100" />
+              <input type="button" class="buyMax btn span2" id="{{name}}" value="Buy Max" />
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      <table class="table table-stripped">
+        <thead>
+          <tr>
+            <th>Increase</th>
+            <th>Cost</th>
+            <th>Current Growth</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="growthIncrease">
+            <td class="action">Buy Growth</td>
+            <td class="growthCost">${{formatNumber player.growthCost}}</td>
+            <td class="currentGrowth">{{formatNumber player.growth}}</td>
+            <input type="button" class="buyGrowth btn span2" id="{{player.growthCost}}" value="Buy" />
+            <input type="button" class="buyTenGrowth btn span2" id="{{player.growthCost}}" value="Buy x10" />
+            <input type="button" class="buyHunGrowth btn span2" id="{{player.growthCost}}" value="Buy x100" />
+            <input type="button" class="buyMaxGrowth btn span2" id="{{player.growthCost}}" value="Buy Max" />
+          </tr>
+        </tbody>
+      </table>
+    {{else}}
+      {{> spinner}}
+    {{/if}}
+  </div>
 </template>

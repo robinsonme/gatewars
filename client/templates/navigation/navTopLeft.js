@@ -3,5 +3,12 @@ Template.navTopLeft.helpers({
     var currentRoute = Router.current();
     return currentRoute &&
       template === currentRoute.lookupTemplate() ? 'active' : '';
+  },
+  'formatNumber':function(number) {
+    return number.toLocaleString();
+  },
+  'player':function() {
+    var currentUser = Meteor.userId();
+    return Players.findOne({createdBy: currentUser});
   }
 });

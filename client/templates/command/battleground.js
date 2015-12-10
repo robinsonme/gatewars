@@ -2,7 +2,7 @@ Template.battleground.helpers({
   'players': function() {
     return Players.find({}, {sort: {'money': -1}});
   },
-  'formatCurrency':function(number) {
+  'formatNumber':function(number) {
     return number.toLocaleString();
   },
   'addOne': function(number) {

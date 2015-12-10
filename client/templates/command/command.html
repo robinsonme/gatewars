@@ -1,33 +1,18 @@
 <template name="command">
   <div class="col-md-10">
     <h2>{{currentUser.username}}'s Command Center</h2>
-    <p>
-      You currently make {{formatCurrency player.rate}} and have {{formatCurrency player.money}} gold.
-    </p>
-    <input type="button" class="code btn span4" value="Raid a mine. ($25)" />
-    <input type="button" class="codeBig btn span4" value="Raid a bigger mine. ($500)" />
-    <br />
-    <table class="table table-stripped">
-      <thead>
-        <tr>
-          <th>Action</th>
-          <th>Cost</th>
-          <th>Own</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each workers}}
-          <tr class="workers">
-            <td class="action">Buy {{name}}</td>
-            <td class="cost">${{formatCurrency cost}}</td>
-            <td class="number">{{formatCurrency (number name)}}</td>
-            <input type="button" class="buy btn span2" id="{{name}}" value="Buy" />
-            <input type="button" class="buyTen btn span2" id="{{name}}" value="Buy x10" />
-            <input type="button" class="buyHun btn span2" id="{{name}}" value="Buy x100" />
-            <input type="button" class="buyMax btn span2" id="{{name}}" value="Buy Max" />
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
+    {{#if Template.subscriptionsReady}}
+      <p>
+        You currently make {{formatNumber player.rate}} and have {{formatNumber player.money}} gold.
+      </p>
+      <p>
+        You have {{formatNumber player.citizens}} to train and {{formatNumber player.growth}} citizens will arrive next turn.
+      </p>
+      <input type="button" class="code btn span4" value="Raid a mine. ($25)" />
+      <input type="button" class="codeBig btn span4" value="Raid a bigger mine. ($500)" />
+      <input type="button" class="codeBiggest btn span4" value="Raid a biggest mine. ($5,000,000)" />
+    {{else}}
+      {{> spinner}}
+    {{/if}}
   </div>
 </template>
