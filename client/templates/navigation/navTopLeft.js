@@ -12,3 +12,7 @@ Template.navTopLeft.helpers({
     return Players.findOne({createdBy: currentUser});
   }
 });
+
+Template.navTopLeft.onCreated(function() {
+  this.subscribe('thisPlayer');
+});
