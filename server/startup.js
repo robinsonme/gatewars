@@ -12,4 +12,19 @@ Meteor.startup(function(){
       Workers.insert(workerData[i]);
     }
   }
+
+  var timerData = [{name: "Turns", time: 300}, {name: "Births", time: 1800}, {name: "Work", time: 3600}];
+
+  if(Timers.find().count() === 0) {
+    for (var i = 0; i < timerData.length; i++) {
+      Timers.insert(timerData[i]);
+    }
+  }
+
+  var timers = [];
+  for (var i = 0; i < timerData.length; i++) {
+    timers[timerData[i].name.toLowerCase() + "Timer"] = new Countdown(timerData[i].time);
+  }
+  console.log(timers);
+
 });

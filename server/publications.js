@@ -14,3 +14,7 @@ Meteor.publish('thisPlayer', function () {
 Meteor.publish('workers', function () {
   return Workers.find();
 });
+
+Meteor.publish('timers', function () {
+  return Timers.find();
+});
