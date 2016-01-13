@@ -5,7 +5,12 @@ Template.navTopLeft.helpers({
       template === currentRoute.lookupTemplate() ? 'active' : '';
   },
   'formatNumber':function(number) {
-    return number.toLocaleString();
+    if (number || number == 0) {
+      var num = number && number.toLocaleString();
+      return num;
+    } else {
+      return undefined;
+    }
   },
   'player':function() {
     var currentUser = Meteor.userId();

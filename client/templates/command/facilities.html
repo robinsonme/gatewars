@@ -1,0 +1,34 @@
+<template name="facilities">
+  <div class="col-md-10">
+    <h2>{{currentUser.username}}'s Facilities Managment</h2>
+    {{#if Template.subscriptionsReady}}
+      <p>
+        You have {{formatNumber (floor player.citizens)}} to train and {{formatNumber player.growth}} citizens will arrive next turn.
+      </p>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Build</th>
+            <th>Cost</th>
+            <th>Own</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each facility}}
+            <tr class="facilities">
+              <td class="action">Buy {{name}}</td>
+              <td class="cost">${{formatNumber (floor cost)}}</td>
+              <td class="number">{{formatNumber (floor number)}}</td>
+              <input type="button" class="buy btn span2" id="{{name}}" value="Buy" />
+              <input type="button" class="buyTen btn span2" id="{{name}}" value="Buy x10" />
+              <input type="button" class="buyHun btn span2" id="{{name}}" value="Buy x100" />
+              <input type="button" class="buyMax btn span2" id="{{name}}" value="Buy Max" />
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{else}}
+      {{> spinner}}
+    {{/if}}
+  </div>
+</template>

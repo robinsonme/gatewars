@@ -3,9 +3,9 @@
     <h2>{{currentUser.username}}'s Training Ground</h2>
     {{#if Template.subscriptionsReady}}
       <p>
-        You have {{formatNumber player.citizens}} to train and {{formatNumber player.growth}} citizens will arrive next turn.
+        You have {{formatNumber (floor player.citizens)}} to train and {{formatNumber player.growth}} citizens will arrive next turn.
       </p>
-      <table class="table table-stripped">
+      <table class="table table-hover">
         <thead>
           <tr>
             <th>Train</th>
@@ -17,8 +17,8 @@
           {{#each workers}}
             <tr class="workers">
               <td class="action">Buy {{name}}</td>
-              <td class="cost">${{formatNumber cost}}</td>
-              <td class="number">{{formatNumber (number name)}}</td>
+              <td class="cost">${{formatNumber (floor cost)}}</td>
+              <td class="number">{{formatNumber (floor number)}}</td>
               <input type="button" class="buy btn span2" id="{{name}}" value="Buy" />
               <input type="button" class="buyTen btn span2" id="{{name}}" value="Buy x10" />
               <input type="button" class="buyHun btn span2" id="{{name}}" value="Buy x100" />
@@ -27,7 +27,7 @@
           {{/each}}
         </tbody>
       </table>
-      <table class="table table-stripped">
+      <table class="table table-hover">
         <thead>
           <tr>
             <th>Increase</th>

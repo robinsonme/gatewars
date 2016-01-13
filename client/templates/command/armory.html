@@ -1,5 +1,76 @@
 <template name="armory">
-  <p align="center">
-    The armory.
-  </p>
+  <div class="col-md-10">
+    <h2>{{currentUser.username}}'s Armory</h2>
+    {{#if Template.subscriptionsReady}}
+      <p>
+        You have {{formatNumber (floor player.citizens)}} to train and {{formatNumber player.growth}} citizens will arrive next turn.
+      </p>
+      <div class="col-md-4">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Soldier Type</th>
+              <th>Own</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each soldier}}
+              <tr class="soldiers">
+                <td class="action">{{name}}</td>
+                <td class="number">{{formatNumber (floor number)}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-5">
+        <table class="table table-hover col-md-6">
+          <thead>
+            <tr>
+              <th>Offensive Weapons</th>
+              <th>Cost</th>
+              <th>Own</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each offWeapon}}
+              <tr class="weapons">
+                <td class="action">Buy {{name}}</td>
+                <td class="cost">${{formatNumber (floor cost)}}</td>
+                <td class="number">{{formatNumber (floor number)}}</td>
+                <input type="button" class="buy btn span2" id="{{name}}" value="Buy" />
+                <input type="button" class="buyTen btn span2" id="{{name}}" value="Buy x10" />
+                <input type="button" class="buyHun btn span2" id="{{name}}" value="Buy x100" />
+                <input type="button" class="buyMax btn span2" id="{{name}}" value="Buy Max" />
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        <table class="table table-hover col-md-6">
+          <thead>
+            <tr>
+              <th>Defensive Weapons</th>
+              <th>Cost</th>
+              <th>Own</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each defWeapon}}
+              <tr class="weapons">
+                <td class="action">Buy {{name}}</td>
+                <td class="cost">${{formatNumber (floor cost)}}</td>
+                <td class="number">{{formatNumber (floor number)}}</td>
+                <input type="button" class="buy btn span2" id="{{name}}" value="Buy" />
+                <input type="button" class="buyTen btn span2" id="{{name}}" value="Buy x10" />
+                <input type="button" class="buyHun btn span2" id="{{name}}" value="Buy x100" />
+                <input type="button" class="buyMax btn span2" id="{{name}}" value="Buy Max" />
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    {{else}}
+      {{> spinner}}
+    {{/if}}
+  </div>
 </template>

@@ -3,7 +3,12 @@ Template.battleground.helpers({
     return Players.find({}, {sort: {'money': -1}});
   },
   'formatNumber':function(number) {
-    return number.toLocaleString();
+    if (number || number == 0) {
+      var num = number && number.toLocaleString();
+      return num;
+    } else {
+      return undefined;
+    }
   },
   'addOne': function(number) {
     return number + 1;

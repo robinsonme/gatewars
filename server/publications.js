@@ -11,10 +11,27 @@ Meteor.publish('thisPlayer', function () {
   return Players.find({createdBy: currentUserId});
 });
 
+Meteor.publish('timers', function () {
+  return Timers.find();
+});
+
+
 Meteor.publish('workers', function () {
   return Workers.find();
 });
 
-Meteor.publish('timers', function () {
-  return Timers.find();
+Meteor.publish('soldiers', function () {
+  return Soldiers.find();
+});
+
+Meteor.publish('offWeapons', function () {
+  return OffensiveWeapons.find();
+});
+
+Meteor.publish('defWeapons', function () {
+  return DefensiveWeapons.find();
+});
+
+Meteor.publish('facilities', function () {
+  return Facilities.find();
 });

@@ -1,10 +1,10 @@
-Template.training.helpers({
+Template.facilities.helpers({
   'player':function() {
     var currentUser = Meteor.userId();
     return Players.findOne({createdBy: currentUser});
   },
-  'workers':function() {
-    return Workers.find({});
+  'facility':function() {
+    return Facilities.find({});
   },
   'floor':function (number) {
     if (number || number == 0) {
@@ -36,7 +36,7 @@ Template.training.helpers({
   }
 });
 
-Template.training.events({
+Template.facilities.events({
   'click input.buy': function(event) {
     Meteor.call('purchase', event.target.id);
   },
@@ -99,6 +99,6 @@ Template.training.events({
   },
 });
 
-Template.training.onCreated(function() {
+Template.facilities.onCreated(function() {
   this.subscribe('thisPlayer');
 });
