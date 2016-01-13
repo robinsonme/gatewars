@@ -19,10 +19,10 @@
               <td class="action">Buy {{name}}</td>
               <td class="cost">${{formatNumber (floor cost)}}</td>
               <td class="number">{{formatNumber (floor number)}}</td>
-              <input type="button" class="buy btn span2" id="{{name}}" value="Buy" />
-              <input type="button" class="buyTen btn span2" id="{{name}}" value="Buy x10" />
-              <input type="button" class="buyHun btn span2" id="{{name}}" value="Buy x100" />
-              <input type="button" class="buyMax btn span2" id="{{name}}" value="Buy Max" />
+              <input type="button" class="trainWorker btn btn-primary span2" id="{{name}}" data-number="1" value="Buy" />
+              <input type="button" class="trainWorker btn btn-primary span2" id="{{name}}" data-number="10" value="Buy x10" />
+              <input type="button" class="trainWorker btn btn-primary span2" id="{{name}}" data-number="100" value="Buy x100" />
+              <input type="button" class="trainMax btn btn-primary span2" id="{{name}}" data-number="max" value="Buy Max" />
             </tr>
           {{/each}}
         </tbody>
@@ -40,15 +40,16 @@
             <td class="action">Buy Growth</td>
             <td class="growthCost">${{formatNumber player.growthCost}}</td>
             <td class="currentGrowth">{{formatNumber player.growth}}</td>
-            <input type="button" class="buyGrowth btn span2" value="Buy" />
-            <input type="button" class="buyTenGrowth btn span2" value="Buy x10" />
-            <input type="button" class="buyHunGrowth btn span2" value="Buy x100" />
-            <input type="button" class="buyMaxGrowth btn span2" value="Buy Max" />
+            <input type="button" class="buyGrowth btn btn-primary span2" data-number="1" value="Buy" />
+            <input type="button" class="buyGrowth btn btn-primary span2" data-number="10" value="Buy x10" />
+            <input type="button" class="buyGrowth btn btn-primary span2" data-number="100" value="Buy x100" />
+            <input type="button" class="buyGrowth btn btn-primary span2" data-number="max" value="Buy Max" />
           </tr>
           <tr>
-            <input type="button" class="killCitizens btn span2" value="Kill All Citizens" />
-            <input type="button" class="resetGrowthRate btn span2" value="Reset Growth Rate" />
-            <input type="button" class="killWorkers btn span2" value="Kill Workers" />
+            <input type="button" class="killCitizens btn btn-primary span2" value="Kill All Citizens" />
+            <input type="button" class="resetGrowthRate btn btn-primary span2" value="Reset Growth Rate" />
+            <input type="button" class="killWorkers btn btn-primary span2" value="Kill Workers" />
+            <input type="button" class="resetMoney btn btn-primary span2" value="Give Your Gold Away" />
           </tr>
         </tbody>
       </table>

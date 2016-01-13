@@ -24,3 +24,4 @@ iron:router
 check
 themeteorchef:jquery-validation
 themeteorchef:bert
+underscore

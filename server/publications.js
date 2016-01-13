@@ -17,21 +17,31 @@ Meteor.publish('timers', function () {
 
 
 Meteor.publish('workers', function () {
-  return Workers.find();
+  var currentUserId = this.userId;
+  return Workers.find({createdBy: currentUserId});
 });
 
 Meteor.publish('soldiers', function () {
-  return Soldiers.find();
+  var currentUserId = this.userId;
+  return Soldiers.find({createdBy: currentUserId});
 });
 
 Meteor.publish('offWeapons', function () {
-  return OffensiveWeapons.find();
+  var currentUserId = this.userId;
+  return OffensiveWeapons.find({createdBy: currentUserId});
 });
 
 Meteor.publish('defWeapons', function () {
-  return DefensiveWeapons.find();
+  var currentUserId = this.userId;
+  return DefensiveWeapons.find({createdBy: currentUserId});
 });
 
 Meteor.publish('facilities', function () {
-  return Facilities.find();
+  var currentUserId = this.userId;
+  return Facilities.find({createdBy: currentUserId});
+});
+
+Meteor.publish('resources', function () {
+  var currentUserId = this.userId;
+  return Resources.find({createdBy: currentUserId});
 });

@@ -4,10 +4,11 @@ Template.training.helpers({
     return Players.findOne({createdBy: currentUser});
   },
   'workers':function() {
-    return Workers.find({});
+    var currentUser = Meteor.userId();
+    return Workers.findOne({createdBy: currentUser}).workers;
   },
   'floor':function (number) {
-    if (number || number == 0) {
+    if (number || number === 0) {
       var num = number;
       num = Math.floor(num);
       return num;
@@ -23,70 +24,79 @@ Template.training.helpers({
       return undefined;
     }
   },
-  'number': function(name) {
-    var currentUser = Meteor.userId();
-    var selector = {};
-    selector[name] = 1;
-    var player = Players.findOne({createdBy: currentUser}, {fields: selector});
-    if(player[name]) {
-      return player[name];
-    } else {
-      return 0;
-    }
-  }
 });
 
 Template.training.events({
-  'click input.buy': function(event) {
-    Meteor.call('purchase', event.target.id);
+  'click input.trainWorker': function(event) {
+    var number = event.target.dataset.number;
+    var workerName = event.target.id;
+    number = parseInt(number);
+
+    Meteor.call('trainWorker', workerName, number, function(error) {
+      if (error) {
+        Bert.alert( error.reason, 'danger', 'growl-top-right', 'fa-frown-o' );
+      } else {
+        Bert.alert( "Congrats on your purchase.", 'success', 'growl-top-right', 'fa-check' );
+      }
+    });
   },
-  'click input.buyTen': function(event) {
-    Meteor.call('purchase', event.target.id, 10);
-  },
-  'click input.buyHun': function(event) {
-    Meteor.call('purchase', event.target.id, 100);
-  },
-  'click input.buyMax': function(event) {
-    var worker = Workers.findOne({name: event.target.id});
+  'click input.trainMax': function(event) {
     var currentUser = Meteor.userId();
-    var player = Players.findOne({createdBy: currentUser}, {fields: {money: 1, citizens: 1}});
+    var workerName = event.target.id;
+    var workersArray = Workers.findOne().workers;
+    var worker = _.find(workersArray, function(obj) { return obj.name === workerName});
+
+    var player = Players.findOne({createdBy: currentUser}, {fields: {money: 1, citizens: 1, }});
+
     var max = Math.floor(player.money / worker.cost);
     if(max > player.citizens) {
       max = player.citizens;
     }
     Meteor.call('purchase', event.target.id, max);
   },
-  'click input.buyGrowth': function() {
-    Meteor.call('purchaseGrowth');
-  },
-  'click input.buyTenGrowth': function() {
-    Meteor.call('purchaseGrowth', 10);
-  },
-  'click input.buyHunGrowth': function() {
-    Meteor.call('purchaseGrowth', 100);
-  },
-  'click input.buyMaxGrowth': function() {
-    var currentUser = Meteor.userId();
-    var player = Players.findOne({createdBy: currentUser}, {fields: {money: 1, growthCost: 1}});
+  'click input.buyGrowth': function(event) {
+    var number = event.target.dataset.number;
+    number = parseInt(number);
 
-    var cost = player.growthCost;
-    cost = Math.ceil(cost);
-    var totalCost = 0;
-    var max = 0;
-    while (player.money >= totalCost) {
-      cost = Math.ceil(cost * 1.01);
-      totalCost = totalCost + cost;
-      max = max + 1;
-    }
-    if (totalCost > player.money) {
-      max = max - 1;
-    }
-    console.log("Max: "+ max);
-    console.log("TotalCost: "+ totalCost);
-    console.log("Money: "+ player.money);
-    console.log("GrowthCost: "+ player.growthCost);
+    // if a NaN was returned in parsing run the max buy
+    if (isNaN(number)) { // buy max
+      var currentUser = Meteor.userId();
+      var player = Players.findOne({createdBy: currentUser}, {fields: {money: 1, growthCost: 1}});
 
-    Meteor.call('purchaseGrowth', max);
+      var cost = player.growthCost;
+      cost = Math.ceil(cost);
+      var totalCost = cost;
+      var max = 1;
+      var money = player.money;
+      if (money >= totalCost) {
+        while (money >= totalCost) {
+          cost = Math.ceil(cost * 1.01);
+          totalCost = totalCost + cost;
+          max = max + 1;
+        }
+      }
+
+      if (totalCost >= player.money) {
+        max = max - 1;
+      }
+
+      Meteor.call('purchaseGrowth', max, function(error) {
+        if (error) {
+          Bert.alert( error.reason, 'danger', 'growl-top-right', 'fa-frown-o' );
+        } else {
+          Bert.alert( "Congrats on your purchase.", 'success', 'growl-top-right', 'fa-check' );
+        }
+      });
+    }
+    else { // buy a specific quantity
+      Meteor.call('purchaseGrowth', number, function(error) {
+        if (error) {
+          Bert.alert( error.reason, 'danger', 'growl-top-right', 'fa-frown-o' );
+        } else {
+          Bert.alert( "Congrats on your purchase.", 'success', 'growl-top-right', 'fa-check' );
+        }
+      });
+    }
   },
   'click input.resetGrowthRate': function() {
     Meteor.call('resetGrowthRate');
@@ -97,6 +107,9 @@ Template.training.events({
   'click input.killWorkers': function() {
     Meteor.call('killWorkers');
   },
+  'click input.resetMoney': function() {
+    Meteor.call('resetMoney');
+  }
 });
 
 Template.training.onCreated(function() {

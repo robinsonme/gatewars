@@ -1,0 +1,12 @@
+cost $50,148
+rate 5.84
+
+
+// create the worker DB
+var workerData = [{name: "Solar Tech", cost: 500}, {name: "Asteroid Miner", cost: 500}, {name: "He-3 Gatherer", cost: 500}, {name: "Scientist", cost: 500}, {name: "Engineer", cost: 500}, {name: "Hydroponics Worker", cost: 500}, {name: "Covert Operative", cost: 5000}, {name: "Internal Security", cost: 5000}];
+// fill the worker DB if it doesn't already have info
+if(Workers.find().count() === 0) {
+  for (var i = 0; i < workerData.length; i++) {
+    Workers.insert(workerData[i]);
+  }
+}
