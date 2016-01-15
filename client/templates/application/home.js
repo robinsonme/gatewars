@@ -1,6 +1,6 @@
 Template.home.helpers({
   'players': function() {
-    return Players.find({}, {sort: {'money': -1}, limit: 10});
+    return Players.find({}, {limit: 10});
   },
   'formatNumber':function(number) {
     if (number || number == 0) {

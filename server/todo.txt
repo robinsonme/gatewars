@@ -1,0 +1,30 @@
+// future facilities
+
+  {name: "Space Station", amount: 0, cost: STARTING_SOLAR_ARRAY_COST, productionRate: 0},
+  {name: "Solar Array", amount: 0, cost: STARTING_SOLAR_ARRAY_COST, productionRate: 0},
+  {name: "Habitation Pod", amount: 0, cost: STARTING_HABITATION_POD_COST, productionRate: 0},
+  {name: "Hydroponics Bay", amount: 0, cost: STARTING_HYDROPONICS_BAY_COST, productionRate: 0},
+  {name: "He-3 Collector", amount: 0, cost: STARTING_HE_3_COLLECTOR_COST, productionRate: 0},
+  {name: "Exchange", amount: 0, cost: STARTING_EXCHANGE_COST, productionRate: 0},
+  {name: "Science Lab", amount: 0, cost: STARTING_SCIENCE_LAB_COST, productionRate: 0},
+  {name: "Weapons Lab", amount: 0, cost: STARTING_WEAPONS_LAB_COST, productionRate: 0},
+  {name: "Observatory", amount: 0, cost: STARTING_OBSERVATORY_COST, productionRate: 0},
+  {name: "Embassy", amount: 0, cost: STARTING_EMBASSY_COST, productionRate: 0},
+  {name: "Shipyard", amount: 0, cost: STARTING_SHIPYARD_COST, productionRate: 0},
+
+
+// future resources
+
+  {name: "Power", amount: STARTING_POWER, consumptionRate: 0},
+  {name: "He-3", amount: 0, consumptionRate: 0},
+  {name: "Food", amount: STARTING_FOOD, consumptionRate: 0},
+
+// future workers
+
+  {name: "Solar Technician", cost: STARTING_SOLAR_TECHNICIAN_COST, number: 0},
+  {name: "Botonist", cost: STARTING_BOTONIST_COST, number: 0},
+  {name: "He-3 Harvester", cost: STARTING_HE_3_HARVESTER_COST, number: 0},
+  {name: "Scientist", cost: STARTING_SCIENTIST_COST, number: 0},
+  {name: "Armorer", cost: STARTING_ARMORER_COST, number: 0},
+  {name: "Engineer", cost: STARTING_ENGINEER_COST, number: 0},
+  {name: "Broker", cost: STARTING_BROKER_COST, number: 0},

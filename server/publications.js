@@ -18,30 +18,36 @@ Meteor.publish('timers', function () {
 
 Meteor.publish('workers', function () {
   var currentUserId = this.userId;
-  return Workers.find({createdBy: currentUserId});
+  var player = Players.findOne({createdBy: currentUserId});
+  return Workers.find({createdBy: player._id});
 });
 
 Meteor.publish('soldiers', function () {
   var currentUserId = this.userId;
-  return Soldiers.find({createdBy: currentUserId});
+  var player = Players.findOne({createdBy: currentUserId});
+  return Soldiers.find({createdBy: player._id});
 });
 
 Meteor.publish('offWeapons', function () {
   var currentUserId = this.userId;
-  return OffensiveWeapons.find({createdBy: currentUserId});
+  var player = Players.findOne({createdBy: currentUserId});
+  return OffensiveWeapons.find({createdBy: player._id});
 });
 
 Meteor.publish('defWeapons', function () {
   var currentUserId = this.userId;
-  return DefensiveWeapons.find({createdBy: currentUserId});
+  var player = Players.findOne({createdBy: currentUserId});
+  return DefensiveWeapons.find({createdBy: player._id});
 });
 
 Meteor.publish('facilities', function () {
   var currentUserId = this.userId;
-  return Facilities.find({createdBy: currentUserId});
+  var player = Players.findOne({createdBy: currentUserId});
+  return Facilities.find({createdBy: player._id});
 });
 
 Meteor.publish('resources', function () {
   var currentUserId = this.userId;
-  return Resources.find({createdBy: currentUserId});
+  var player = Players.findOne({createdBy: currentUserId});
+  return Resources.find({createdBy: player._id});
 });

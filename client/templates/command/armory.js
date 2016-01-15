@@ -3,17 +3,20 @@ Template.armory.helpers({
     var currentUser = Meteor.userId();
     return Players.findOne({createdBy: currentUser});
   },
-  'soldier':function() {
-    return Soldiers.find({});
+  'soldiers':function() {
+    var currentUser = Meteor.userId();
+    return Soldiers.findOne().soldiers;
   },
   'offWeapon':function() {
-    return OffensiveWeapons.find({});
+    var currentUser = Meteor.userId();
+    return OffensiveWeapons.findOne().offWeapons;
   },
   'defWeapon':function() {
-    return DefensiveWeapons.find({});
+    var currentUser = Meteor.userId();
+    return DefensiveWeapons.findOne().defWeapons;
   },
   'floor':function (number) {
-    if (number || number == 0) {
+    if (number || number === 0) {
       var num = number;
       num = Math.floor(num);
       return num;
@@ -22,24 +25,22 @@ Template.armory.helpers({
     }
   },
   'formatNumber':function(number) {
-    if (number || number == 0) {
+    if (number || number === 0) {
       var num = number && number.toLocaleString();
       return num;
     } else {
       return undefined;
     }
   },
-  'number': function(name) {
-    var currentUser = Meteor.userId();
-    var selector = {};
-    selector[name] = 1;
-    var player = Players.findOne({createdBy: currentUser}, {fields: selector});
-    if(player[name]) {
-      return player[name];
+  'round':function (number) {
+    if (number || number === 0) {
+      var num = number;
+      num = num.toFixed(2);
+      return num;
     } else {
-      return 0;
+      return undefined;
     }
-  }
+  },
 });
 
 Template.armory.events({

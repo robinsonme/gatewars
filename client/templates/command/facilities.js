@@ -4,10 +4,10 @@ Template.facilities.helpers({
     return Players.findOne({createdBy: currentUser});
   },
   'facility':function() {
-    return Facilities.find({});
+    return Facilities.findOne({}).facilities;
   },
   'floor':function (number) {
-    if (number || number == 0) {
+    if (number || number === 0) {
       var num = number;
       num = Math.floor(num);
       return num;
@@ -16,24 +16,13 @@ Template.facilities.helpers({
     }
   },
   'formatNumber':function(number) {
-    if (number || number == 0) {
+    if (number || number === 0) {
       var num = number && number.toLocaleString();
       return num;
     } else {
       return undefined;
     }
   },
-  'number': function(name) {
-    var currentUser = Meteor.userId();
-    var selector = {};
-    selector[name] = 1;
-    var player = Players.findOne({createdBy: currentUser}, {fields: selector});
-    if(player[name]) {
-      return player[name];
-    } else {
-      return 0;
-    }
-  }
 });
 
 Template.facilities.events({

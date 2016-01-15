@@ -10,6 +10,7 @@
           <tr>
             <th>Build</th>
             <th>Cost</th>
+            <th>Production Rate</th>
             <th>Own</th>
           </tr>
         </thead>
@@ -18,7 +19,8 @@
             <tr class="facilities">
               <td class="action">Buy {{name}}</td>
               <td class="cost">${{formatNumber (floor cost)}}</td>
-              <td class="number">{{formatNumber (floor number)}}</td>
+              <td class="productionRate">{{productionRate}}</td>
+              <td class="number">{{formatNumber (floor amount)}}</td>
               <input type="button" class="buy btn span2" id="{{name}}" value="Buy" />
               <input type="button" class="buyTen btn span2" id="{{name}}" value="Buy x10" />
               <input type="button" class="buyHun btn span2" id="{{name}}" value="Buy x100" />

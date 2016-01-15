@@ -3,26 +3,44 @@
     <h2>{{currentUser.username}}'s Training Ground</h2>
     {{#if Template.subscriptionsReady}}
       <p>
-        You have {{formatNumber (floor player.citizens)}} to train and {{formatNumber player.growth}} citizens will arrive next turn.
+        You have {{formatNumber (floor player.citizens)}} citizens to train and {{formatNumber player.growth}} new ones will arrive next turn. You have Ore: {{round resources.amount}}.
       </p>
-      <table class="table table-hover">
+      <table class="table table-hover col-md-10">
         <thead>
           <tr>
             <th>Train</th>
             <th>Cost</th>
             <th>Own</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
           {{#each workers}}
             <tr class="workers">
-              <td class="action">Buy {{name}}</td>
+              <td class="name">Buy {{name}}</td>
               <td class="cost">${{formatNumber (floor cost)}}</td>
               <td class="number">{{formatNumber (floor number)}}</td>
-              <input type="button" class="trainWorker btn btn-primary span2" id="{{name}}" data-number="1" value="Buy" />
-              <input type="button" class="trainWorker btn btn-primary span2" id="{{name}}" data-number="10" value="Buy x10" />
-              <input type="button" class="trainWorker btn btn-primary span2" id="{{name}}" data-number="100" value="Buy x100" />
-              <input type="button" class="trainMax btn btn-primary span2" id="{{name}}" data-number="max" value="Buy Max" />
+              <td class="action">
+                <form class="form-inline train" role="form" id="{{name}}">
+                  <div class="form-group">
+                    <input data-toggle="tooltip" title="Entering something other than a number will result in purchasing the max possible." class="form-control" name="number" placeholder=1>
+                  </div>
+                </form>
+              </td>
+            </tr>
+          {{/each}}
+          {{#each soldiers}}
+            <tr class="soldiers">
+              <td class="name">Buy {{name}}</td>
+              <td class="cost">${{formatNumber (floor cost)}}</td>
+              <td class="number">{{formatNumber (floor number)}}</td>
+              <td class="action">
+                <form class="form-inline train" role="form" id="{{name}}">
+                  <div class="form-group">
+                    <input data-toggle="tooltip" title="Entering something other than a number will result in purchasing the max possible." class="form-control" name="number" placeholder=1>
+                  </div>
+                </form>
+              </td>
             </tr>
           {{/each}}
         </tbody>
@@ -30,20 +48,22 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th>Increase</th>
-            <th>Cost</th>
-            <th>Current Growth</th>
+            <th class="col-md-3">Increase</th>
+            <th class="col-md-1">Cost</th>
+            <th class="col-md-1">Current Growth</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
           <tr class="growthIncrease">
-            <td class="action">Buy Growth</td>
+            <td class="name">Buy Growth</td>
             <td class="growthCost">${{formatNumber player.growthCost}}</td>
             <td class="currentGrowth">{{formatNumber player.growth}}</td>
-            <input type="button" class="buyGrowth btn btn-primary span2" data-number="1" value="Buy" />
-            <input type="button" class="buyGrowth btn btn-primary span2" data-number="10" value="Buy x10" />
-            <input type="button" class="buyGrowth btn btn-primary span2" data-number="100" value="Buy x100" />
-            <input type="button" class="buyGrowth btn btn-primary span2" data-number="max" value="Buy Max" />
+            <form class="form-inline buyGrowth" role="form">
+              <div class="form-group">
+                <input data-toggle="tooltip" title="Entering something other than a number will result in purchasing the max possible." class="form-control" name="number" placeholder=1>
+              </div>
+            </form>
           </tr>
           <tr>
             <input type="button" class="killCitizens btn btn-primary span2" value="Kill All Citizens" />

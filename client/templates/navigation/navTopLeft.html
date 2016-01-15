@@ -2,6 +2,6 @@
 	<li class="{{ activeIfTemplateIs 'home' }}"><a href="{{pathFor route='home'}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
 	{{#if currentUser}}
 		<li class="{{ activeIfTemplateIs 'command' }}"><a href="{{pathFor route='command'}}">{{currentUser.username}}'s Command Center</a></li>
-		<li class="{{ activeIfTemplateIs 'bank' }}"><a href="{{pathFor route='bank'}}">Money: {{formatNumber player.money}}</a></li>
+		<li class="{{ activeIfTemplateIs 'bank' }}"><a href="{{pathFor route='bank'}}">Money: {{formatNumber player.credits}}</a></li>
 	{{/if}}
 </template>

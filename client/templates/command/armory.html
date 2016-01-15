@@ -14,58 +14,74 @@
             </tr>
           </thead>
           <tbody>
-            {{#each soldier}}
+            {{#each soldiers}}
               <tr class="soldiers">
-                <td class="action">{{name}}</td>
+                <td class="name">{{name}}</td>
                 <td class="number">{{formatNumber (floor number)}}</td>
               </tr>
             {{/each}}
           </tbody>
         </table>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-10">
         <table class="table table-hover col-md-6">
           <thead>
             <tr>
-              <th>Offensive Weapons</th>
-              <th>Cost</th>
-              <th>Own</th>
+              <th class="col-md-3">Offensive Weapons</th>
+              <th class="col-md-1">Cost</th>
+              <th class="col-md-1">Own</th>
             </tr>
           </thead>
           <tbody>
             {{#each offWeapon}}
               <tr class="weapons">
-                <td class="action">Buy {{name}}</td>
+                <td class="name">Buy {{name}}</td>
                 <td class="cost">${{formatNumber (floor cost)}}</td>
                 <td class="number">{{formatNumber (floor number)}}</td>
-                <input type="button" class="buy btn span2" id="{{name}}" value="Buy" />
-                <input type="button" class="buyTen btn span2" id="{{name}}" value="Buy x10" />
-                <input type="button" class="buyHun btn span2" id="{{name}}" value="Buy x100" />
-                <input type="button" class="buyMax btn span2" id="{{name}}" value="Buy Max" />
+                <form class="form-inline" role="form">
+                  <div class="form-group trainWorker" id="">
+                    <input type="number" class="form-control" name="number" placeholder=1>
+                  </div>
+                  <button type="button" class="buy btn btn-primary span2" id="{{name}}" value="Buy">Buy</button>
+                </form>
+                <!--
+                  <input type="button" class="buy btn btn-primary span2" id="{{name}}" value="Buy" />
+                  <input type="button" class="buyTen btn btn-primary span2" id="{{name}}" value="Buy x10" />
+                  <input type="button" class="buyHun btn btn-primary span2" id="{{name}}" value="Buy x100" />
+                  <input type="button" class="buyMax btn btn-primary span2" id="{{name}}" value="Buy Max" />
+                -->
               </tr>
             {{/each}}
           </tbody>
         </table>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-10">
         <table class="table table-hover col-md-6">
           <thead>
             <tr>
-              <th>Defensive Weapons</th>
-              <th>Cost</th>
-              <th>Own</th>
+              <th class="col-md-3">Defensive Weapons</th>
+              <th class="col-md-1">Cost</th>
+              <th class="col-md-1">Own</th>
             </tr>
           </thead>
           <tbody>
             {{#each defWeapon}}
               <tr class="weapons">
-                <td class="action">Buy {{name}}</td>
+                <td class="name">Buy {{name}}</td>
                 <td class="cost">${{formatNumber (floor cost)}}</td>
                 <td class="number">{{formatNumber (floor number)}}</td>
-                <input type="button" class="buy btn span2" id="{{name}}" value="Buy" />
-                <input type="button" class="buyTen btn span2" id="{{name}}" value="Buy x10" />
-                <input type="button" class="buyHun btn span2" id="{{name}}" value="Buy x100" />
-                <input type="button" class="buyMax btn span2" id="{{name}}" value="Buy Max" />
+                <form class="form-inline" role="form">
+                  <div class="form-group trainWorker" id="">
+                    <input type="number" class="form-control" name="number" placeholder=1>
+                  </div>
+                  <button type="button" class="buy btn btn-primary span2" id="{{name}}" value="Buy">Buy</button>
+                </form>
+
+                <!--
+                  <input type="button" class="buyTen btn btn-primary span2" id="{{name}}" value="Buy x10" />
+                  <input type="button" class="buyHun btn btn-primary span2" id="{{name}}" value="Buy x100" />
+                  <input type="button" class="buyMax btn btn-primary span2" id="{{name}}" value="Buy Max" />
+                -->
               </tr>
             {{/each}}
           </tbody>

@@ -1,7 +1,13 @@
 Meteor.startup(function(){
   Meteor.setInterval(function(){
     Players.find({}).map(function(player) {
-      Players.update({_id: player._id}, {$inc:{"money": player.rate, "citizens": player.growth}})
+      Players.update({_id: player._id}, {$inc:{ "citizens": player.growth}});
+
+      var facilitiesArray = Facilities.findOne({createdBy: player._id}).facilities;
+      var facility = _.find(facilitiesArray, function(obj) { return obj.name === "Mining Facility"});
+      Resources.update({createdBy: player._id, 'resources.name': 'Ore'}, {$inc: {'resources.$.amount': facility.productionRate}});
+
+
     });
   }, 1000);
 
