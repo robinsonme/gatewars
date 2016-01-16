@@ -5,6 +5,9 @@
       <p>
         You have {{formatNumber (floor player.citizens)}} to train and {{formatNumber player.growth}} citizens will arrive next turn.
       </p>
+      <p>
+        You have {{formatNumber resources.amount}} to spend on weapons.
+      </p>
       <div class="col-md-10">
         <table class="table table-hover">
           <thead>
@@ -36,20 +39,13 @@
             {{#each offWeapon}}
               <tr class="weapons">
                 <td class="name">Buy {{name}}</td>
-                <td class="cost">${{formatNumber (floor cost)}}</td>
+                <td class="cost">{{formatNumber (floor cost)}}</td>
                 <td class="number">{{formatNumber (floor number)}}</td>
-                <form class="form-inline" role="form">
-                  <div class="form-group trainWorker" id="">
+                <form class="form-inline" role="form" id="{{name}}">
+                  <div class="form-group trainWorker">
                     <input type="number" class="form-control" name="number" placeholder=1>
                   </div>
-                  <button type="button" class="buy btn btn-primary span2" id="{{name}}" value="Buy">Buy</button>
                 </form>
-                <!--
-                  <input type="button" class="buy btn btn-primary span2" id="{{name}}" value="Buy" />
-                  <input type="button" class="buyTen btn btn-primary span2" id="{{name}}" value="Buy x10" />
-                  <input type="button" class="buyHun btn btn-primary span2" id="{{name}}" value="Buy x100" />
-                  <input type="button" class="buyMax btn btn-primary span2" id="{{name}}" value="Buy Max" />
-                -->
               </tr>
             {{/each}}
           </tbody>
@@ -74,14 +70,7 @@
                   <div class="form-group trainWorker" id="">
                     <input type="number" class="form-control" name="number" placeholder=1>
                   </div>
-                  <button type="button" class="buy btn btn-primary span2" id="{{name}}" value="Buy">Buy</button>
                 </form>
-
-                <!--
-                  <input type="button" class="buyTen btn btn-primary span2" id="{{name}}" value="Buy x10" />
-                  <input type="button" class="buyHun btn btn-primary span2" id="{{name}}" value="Buy x100" />
-                  <input type="button" class="buyMax btn btn-primary span2" id="{{name}}" value="Buy Max" />
-                -->
               </tr>
             {{/each}}
           </tbody>

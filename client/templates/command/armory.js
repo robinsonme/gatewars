@@ -3,6 +3,12 @@ Template.armory.helpers({
     var currentUser = Meteor.userId();
     return Players.findOne({createdBy: currentUser});
   },
+  'resources':function() {
+    var currentUser = Meteor.userId();
+    var resourcesArray = Resources.findOne().resources;
+    var resource = _.find(resourcesArray, function(obj) { return obj.name === 'Ore'});
+    return resource;
+  },
   'soldiers':function() {
     var currentUser = Meteor.userId();
     return Soldiers.findOne().soldiers;
@@ -44,24 +50,78 @@ Template.armory.helpers({
 });
 
 Template.armory.events({
-  'click input.buy': function(event) {
-    Meteor.call('purchase', event.target.id);
-  },
-  'click input.buyTen': function(event) {
-    Meteor.call('purchase', event.target.id, 10);
-  },
-  'click input.buyHun': function(event) {
-    Meteor.call('purchase', event.target.id, 100);
-  },
-  'click input.buyMax': function(event) {
-    var worker = Workers.findOne({name: event.target.id});
-    var currentUser = Meteor.userId();
-    var player = Players.findOne({createdBy: currentUser}, {fields: {money: 1, citizens: 1}});
-    var max = Math.floor(player.money / worker.cost);
-    if(max > player.citizens) {
-      max = player.citizens;
+  'submit .buy': function(event) {
+    event.preventDefault(); // prevent submit form default from occuring and refreshing page
+    var number = event.target.number.value; // get number to train
+    var name = event.target.id; // get name of unit to train
+    if (number === "" || number == 0) { // if the number is blank or 0 set it 1
+      number = 1;
     }
-    Meteor.call('purchase', event.target.id, max);
+
+    // check to see if the weapon is offensive
+    var weaponsArray = OffensiveWeapons.findOne().offWeapons;
+    var weapon = _.find(weaponsArray, function(obj) { return obj.name === name});
+
+    if (weapon) { // if weapon is offsensive continue otherwise go to else
+      if (isNaN(number)) { // something other than number requested calculate max
+        var currentUser = Meteor.userId(); // get the current user
+
+        // get the resource required amount
+        var resourcesArray = Resources.findOne().resources;
+        var resource = _.find(resourcesArray, function(obj) { return obj.name === weapon[type]});
+
+        number = Math.floor(resource.amount / weapon.cost); // set the max buyable for the player based on ore
+
+        Meteor.call('buyWeapon', name, number, function(error, result) { // call our function get alert either way
+          if (error) {
+            Bert.alert( error.reason, 'danger', 'growl-top-right', 'fa-frown-o' );
+            console.log(result);
+          } else {
+            Bert.alert( result, 'success', 'growl-top-right', 'fa-check' );
+          }
+        });
+      } else { // a specific number is input
+        Meteor.call('buyWeapon', name, number, function(error, result) { // call our function get alert either way
+          if (error) {
+            Bert.alert( error.reason, 'danger', 'growl-top-right', 'fa-frown-o' );
+            console.log(result);
+          } else {
+            Bert.alert( result, 'success', 'growl-top-right', 'fa-check' );
+          }
+        });
+      }
+    } else { // weapon was not offensive
+      var weaponsArray = DefensiveWeapons.findOne().defWeapons;
+      var weapon = _.find(weaponsArray, function(obj) { return obj.name === name});
+
+      if (isNaN(number)) { // something other than number requested calculate max
+        var currentUser = Meteor.userId(); // get the current user
+
+        // get the resource required amount
+        var resourcesArray = Resources.findOne().resources;
+        var resource = _.find(resourcesArray, function(obj) { return obj.name === weapon[type]});
+
+        number = Math.floor(resource.amount / weapon.cost); // set the max buyable for the player based on ore
+
+        Meteor.call('buyWeapon', name, number, function(error, result) { // call our function get alert either way
+          if (error) {
+            Bert.alert( error.reason, 'danger', 'growl-top-right', 'fa-frown-o' );
+            console.log(result);
+          } else {
+            Bert.alert( result, 'success', 'growl-top-right', 'fa-check' );
+          }
+        });
+      } else { // a specific number is input
+        Meteor.call('buyWeapon', name, number, function(error, result) { // call our function get alert either way
+          if (error) {
+            Bert.alert( error.reason, 'danger', 'growl-top-right', 'fa-frown-o' );
+            console.log(result);
+          } else {
+            Bert.alert( result, 'success', 'growl-top-right', 'fa-check' );
+          }
+        });
+      }
+    }
   },
 });
 

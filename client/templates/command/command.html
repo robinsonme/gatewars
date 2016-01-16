@@ -8,9 +8,27 @@
       <p>
         You have {{formatNumber (floor player.citizens)}} to train and {{formatNumber player.growth}} citizens will arrive next turn.
       </p>
-      <input type="button" class="code btn span4" value="Raid a mine. ($25)" />
-      <input type="button" class="codeBig btn span4" value="Raid a bigger mine. ($500)" />
-      <input type="button" class="codeBiggest btn span4" value="Raid a biggest mine. ($5,000,000)" />
+      <input type="button" class="code btn btn-primary" value="Raid a mine. ($25)" />
+      <input type="button" class="codeBig btn btn-primary" value="Raid a bigger mine. ($500)" />
+      <input type="button" class="codeBiggest btn btn-primary" value="Raid a biggest mine. ($5,000,000)" />
+      <table class="table table-hover col-md-10">
+        <thead>
+          <tr>
+            <th>Resource</th>
+            <th>Amount</th>
+            <th>Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each resources}}
+            <tr class="resources">
+              <td class="name">Buy {{name}}</td>
+              <td class="amount">{{formatNumber amount}}</td>
+              <td class="rate">{{formatNumber productionRate}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
     {{else}}
       {{> spinner}}
     {{/if}}

@@ -105,11 +105,11 @@ Template.training.events({
           if(max > soldierType.number) { // determine if our max is more than the number of a specific unit type
             max =  Math.floor(soldierType.number); // if more set to that number as max
           }
-          Meteor.call('trainSoldier', name, max, function(error){ // call our function get alert either way
+          Meteor.call('trainSoldier', name, max, function(error, result){ // call our function get alert either way
             if (error) {
               Bert.alert( error.reason, 'danger', 'growl-top-right', 'fa-frown-o' );
             } else {
-              Bert.alert( "Congrats on your purchase of " + max + " " + name + ".", 'success', 'growl-top-right', 'fa-check' );
+              Bert.alert( result, 'success', 'growl-top-right', 'fa-check' );
             }
           });
         } else { // our required unit type to train was citizens
@@ -119,20 +119,20 @@ Template.training.events({
           if(max > player.citizens) { // determine if our max is more than the number of a specific unit type
             max =  Math.floor(player.citizens);// if more set to that number as max
           }
-          Meteor.call('trainSoldier', name, max, function(error){ // call our function get alert either way
+          Meteor.call('trainSoldier', name, max, function(error, result){ // call our function get alert either way
             if (error) {
               Bert.alert( error.reason, 'danger', 'growl-top-right', 'fa-frown-o' );
             } else {
-              Bert.alert( "Congrats on your purchase of " + max + " " + name + ".", 'success', 'growl-top-right', 'fa-check' );
+              Bert.alert( result, 'success', 'growl-top-right', 'fa-check' );
             }
           });
         }
       } else { // a specific number was entered
-        Meteor.call('trainSoldier', name, number, function(error) { // call our function get alert either way
+        Meteor.call('trainSoldier', name, number, function(error, result) { // call our function get alert either way
           if (error) {
             Bert.alert( error.reason, 'danger', 'growl-top-right', 'fa-frown-o' );
           } else {
-            Bert.alert( "Congrats on your purchase of " + number + " " + name + ".", 'success', 'growl-top-right', 'fa-check' );
+            Bert.alert( result, 'success', 'growl-top-right', 'fa-check' );
           }
         });
       }
@@ -187,6 +187,7 @@ Template.training.events({
         }
       });
     }
+    event.target.number.value = "";
   },
   'click input.resetGrowthRate': function() {
     Meteor.call('resetGrowthRate');
